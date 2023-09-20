@@ -76,3 +76,9 @@ class ObjetoComEstrategia {
 | Introdução de estratégias concretas sem manutenção do contexto. |  |
 
 ## Facade
+
+Define uma classe de fachada que tem como intuito agrupar um conjunto de outras fachadas e, obrigatoriamente, subsistemas, os quais são outras classes que possam servir ao facade. A fachada prove acesso a funcionalidades de subsistemas particulares ao seu uso, sendo capaz de direcionar o pedido do cliente e tendo noção de como operar.
+
+A integração de demais fachadas¹ deve ser considerada em casos que a inicial se torne uma espécie de glasse globalizadora (evitando uma poluição de código) - aquela que realiza diversos métodos e fere o principio *Single-Responsability*; outro violado seria o *Open-Closed* visto que o acesso é feito por meio de importações e não implementação ou herança.
+
+¹ *Elas devem poder ser acessadas tanto pela fachada principal quanto pelo cliente*
