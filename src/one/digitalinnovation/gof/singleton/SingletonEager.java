@@ -13,7 +13,7 @@ public class SingletonEager {
 		super();
 	}
 	
-	public static SingletonEager getInstancia() {
+	public static synchronized SingletonEager getInstancia() {
 		return instancia;
 	}
 }
