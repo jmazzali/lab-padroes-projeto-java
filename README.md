@@ -15,4 +15,64 @@ O padrão Singleton é um design pattern que garante que uma classe tenha uma ú
 
 ## Strategy
 
+Define que uma classe (chamada de `context`) deve possuir um campo para armazenar um atributo do tipo *interface*(`strategy`) - a qual deriva em classes (`concrete strategies`) que aplicam seus métodos, no entanto vale ressaltar que o campo é responsável por armazenar *apenas uma estratégia por vez*. 
+
+Sendo assim é possível que o cliente (`client`), ao informar ao *context* a estratégia desejada, lide com diferentes classes como se fossem todas da mesma característica (por meio da interface) e ainda aproveite os métodos de contrato da interface.
+
+Exemplo genérico:
+
+```
+// Interface que define a estratégia
+interface Comportamento {
+    void executar();
+}
+
+// Implementações da interface
+class ComportamentoA implements Comportamento {
+    @Override
+    public void executar() {
+        System.out.println("Executando Comportamento A");
+    }
+}
+
+class ComportamentoB implements Comportamento {
+    @Override
+    public void executar() {
+        System.out.println("Executando Comportamento B");
+    }
+}
+
+// Classe que possui o atributo de estratégia
+class ObjetoComEstrategia {
+    private Comportamento strategy;
+
+    public void setStrategy(Comportamento strategy) {
+        this.strategy = strategy;
+    }
+
+    public void executarComportamento() {
+        if (strategy != null) {
+            strategy.executar();
+        } else {
+            System.out.println("Nenhuma estratégia definida.");
+        }
+    }
+}
+
+```
+
+| Classe                    | Atributos/Métodos                          |
+|---------------------------|--------------------------------------------|
+| ObjetoComEstrategia     | - strategy: Comportamento<br> + setStrategy(strategy: Comportamento)<br> + executarComportamento() |
+| Comportamento           | + executar()                              |
+| ComportamentoA          | + executar()                              |
+| ComportamentoB          | + executar()                              |
+
+| Prós | Contras  |
+|:---:|:---:|
+| Troca de algoritmos usados dentro de um objeto no RunTime. | O client deve instanciar todas as estratégias concretas. |
+| Cada estratégia representa uma maneira diferente de realizar uma tarefa específica. | Em alguns contextos pode apenas complicar/poluir o programa com novas classes e interfaces. |
+| Promove um acoplamento mais fraco e maior flexibilidade (Composição x Herança). |  |
+| Introdução de estratégias concretas sem manutenção do contexto. |  |
+
 ## Facade
